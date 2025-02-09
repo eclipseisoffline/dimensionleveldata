@@ -66,12 +66,22 @@ jar {
 }
 
 publishing {
-    publications {
-        create("mavenJava", MavenPublication) {
-            artifactId = project.archives_base_name
-            from components.java
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/eclipseisoffline/dimensionleveldata")
+            credentials {
+                username = "eclipseisoffline"
+                password = Files.readString(java.nio.file.Path.of("./github_auth"))
+            }
         }
     }
 
-    repositories {}
+    publications {
+        gpr(MavenPublication) {
+            artifactId project.archives_base_name
+
+            from components.java
+        }
+    }
 }

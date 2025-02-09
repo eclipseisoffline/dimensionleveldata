@@ -2,11 +2,22 @@
   "schemaVersion": 1,
   "id": "dimensionleveldata",
   "version": "${version}",
-  "name": "DimensionLevelData",
-  "description": "",
-  "authors": [],
-  "contact": {},
-  "license": "LGPL-3.0",
+  "name": "Dimension Level Data",
+  "description": "This mod splits weather and time properties across dimensions, so that different dimensions can have a different time/weather.",
+  "authors": [
+    {
+      "name": "eclipseisoffline",
+      "contact": {
+        "homepage": "https://github.com/eclipseisoffline"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/dimension-level-data",
+    "issues": "https://github.com/eclipseisoffline/dimensionleveldata/issues",
+    "sources": "https://github.com/eclipseisoffline/dimensionleveldata"
+  },
+  "license": "LGPL-3.0-only",
   "icon": "assets/dimensionleveldata/icon.png",
   "environment": "*",
   "mixins": [
@@ -16,5 +27,14 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.donate": "https://buymeacoffee.com/eclipseisoffline",
+        "modmenu.buymeacoffee": "https://buymeacoffee.com/eclipseisoffline",
+        "modmenu.modrinth": "https://modrinth.com/mod/dimension-level-data"
+      }
+    }
   }
 }
