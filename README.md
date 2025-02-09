@@ -4,7 +4,7 @@
 [![Modrinth Game Versions](https://img.shields.io/modrinth/game-versions/bkJ2cuX0?logo=modrinth&color=008800)](https://modrinth.com/mod/dimension-level-data)
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/bkJ2cuX0?logo=modrinth&color=008800)](https://modrinth.com/mod/dimension-level-data)
 [![Discord Badge](https://img.shields.io/badge/chat-discord-%235865f2)](https://discord.gg/CNNkyWRkqm)
-[![Github Badge](https://img.shields.io/badge/github-modifyplayerdata-white?logo=github)](https://github.com/eclipseisoffline/dimensionleveldata)
+[![Github Badge](https://img.shields.io/badge/github-dimensionleveldata-white?logo=github)](https://github.com/eclipseisoffline/dimensionleveldata)
 ![GitHub License](https://img.shields.io/github/license/eclipseisoffline/dimensionleveldata)
 
 This mod splits weather and time properties across dimensions, so that different dimensions can have a different time/weather.
@@ -46,6 +46,6 @@ Unsupported versions are still available to download, but they won't receive new
 
 ## Usage
 
-Mod builds can be found [here](https://github.com/eclipseisoffline/modifyplayerdata/packages/2069488) and on [Modrinth](https://modrinth.com/mod/dimension-level-data).
+Mod builds can be found [here](https://github.com/eclipseisoffline/dimensionleveldata/packages/2397810) and on [Modrinth](https://modrinth.com/mod/dimension-level-data).
 
-The Fabric API is not required. This mod is not required on clients.
+The Fabric API is required. This mod is not required on clients.
