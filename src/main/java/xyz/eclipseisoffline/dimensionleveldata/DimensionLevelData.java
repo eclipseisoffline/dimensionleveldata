@@ -1,6 +1,5 @@
 package xyz.eclipseisoffline.dimensionleveldata;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DerivedLevelData;
@@ -85,7 +84,7 @@ public class DimensionLevelData extends DerivedLevelData {
     }
 
     public static DimensionLevelData createForLevel(DimensionDataStorage dataStorage, WorldData worldData, ServerLevelData primary) {
-        return dataStorage.computeIfAbsent(Serialized.factory(worldData, primary), "dimension_level_data").data;
+        return Serialized.getForDataStorage(dataStorage, worldData, primary).data;
     }
 
     private static class Serialized extends SavedData implements Supplier<DimensionLevelData> {
@@ -100,7 +99,7 @@ public class DimensionLevelData extends DerivedLevelData {
         }
 
         @Override
-        public @NotNull CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
+        public @NotNull CompoundTag save(CompoundTag tag) {
             tag.putLong("day_time", data.dayTime);
             tag.putInt("clear_weather_time", data.clearWeatherTime);
             tag.putBoolean("thundering", data.thundering);
@@ -116,7 +115,7 @@ public class DimensionLevelData extends DerivedLevelData {
             return data;
         }
 
-        private static Serialized load(WorldData worldData, ServerLevelData wrapped, CompoundTag tag, HolderLookup.Provider registries) {
+        private static Serialized load(WorldData worldData, ServerLevelData wrapped, CompoundTag tag) {
             DimensionLevelData data = new DimensionLevelData(worldData, wrapped);
             data.dayTime = tag.getLong("day_time");
             data.clearWeatherTime = tag.getInt("clear_weather_time");
@@ -128,9 +127,9 @@ public class DimensionLevelData extends DerivedLevelData {
             return new Serialized(data);
         }
 
-        private static Factory<Serialized> factory(WorldData worldData, ServerLevelData wrapped) {
-            return new Factory<>(() -> new Serialized(new DimensionLevelData(worldData, wrapped)),
-                    (tag, registries) -> load(worldData, wrapped, tag, registries), null);
+        private static Serialized getForDataStorage(DimensionDataStorage dataStorage, WorldData worldData, ServerLevelData wrapped) {
+            return dataStorage.computeIfAbsent(tag -> load(worldData, wrapped, tag),
+                    () -> new Serialized(new DimensionLevelData(worldData, wrapped)), "dimension_level_data");
         }
     }
 }
