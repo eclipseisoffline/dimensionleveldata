@@ -1,13 +1,13 @@
 package xyz.eclipseisoffline.dimensionleveldata;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
 import net.minecraft.world.level.storage.DerivedLevelData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.level.storage.WorldData;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -85,7 +85,7 @@ public class DimensionLevelData extends DerivedLevelData {
     }
 
     public static DimensionLevelData createForLevel(DimensionDataStorage dataStorage, WorldData worldData, ServerLevelData primary) {
-        return dataStorage.computeIfAbsent(Serialized.factory(worldData, primary), "dimension_level_data").data;
+        return dataStorage.computeIfAbsent(Serialized.type(worldData, primary)).data;
     }
 
     private static class Serialized extends SavedData implements Supplier<DimensionLevelData> {
@@ -100,37 +100,34 @@ public class DimensionLevelData extends DerivedLevelData {
         }
 
         @Override
-        public @NotNull CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
-            tag.putLong("day_time", data.dayTime);
-            tag.putInt("clear_weather_time", data.clearWeatherTime);
-            tag.putBoolean("thundering", data.thundering);
-            tag.putInt("thunder_time", data.thunderTime);
-            tag.putBoolean("raining", data.raining);
-            tag.putInt("rain_time", data.rainTime);
-
-            return tag;
-        }
-
-        @Override
         public DimensionLevelData get() {
             return data;
         }
 
-        private static Serialized load(WorldData worldData, ServerLevelData wrapped, CompoundTag tag, HolderLookup.Provider registries) {
-            DimensionLevelData data = new DimensionLevelData(worldData, wrapped);
-            data.dayTime = tag.getLong("day_time");
-            data.clearWeatherTime = tag.getInt("clear_weather_time");
-            data.thundering = tag.getBoolean("thundering");
-            data.thunderTime = tag.getInt("thunder_time");
-            data.raining = tag.getBoolean("raining");
-            data.rainTime = tag.getInt("rain_time");
-
-            return new Serialized(data);
+        private static SavedDataType<Serialized> type(WorldData worldData, ServerLevelData wrapped) {
+            return new SavedDataType<>("dimension_level_data", () -> new Serialized(new DimensionLevelData(worldData, wrapped)), codec(worldData, wrapped), null);
         }
 
-        private static Factory<Serialized> factory(WorldData worldData, ServerLevelData wrapped) {
-            return new Factory<>(() -> new Serialized(new DimensionLevelData(worldData, wrapped)),
-                    (tag, registries) -> load(worldData, wrapped, tag, registries), null);
+        private static Codec<Serialized> codec(WorldData worldData, ServerLevelData wrapped) {
+            return RecordCodecBuilder.<DimensionLevelData>create(instance ->
+                    instance.group(
+                            Codec.LONG.fieldOf("day_time").forGetter(DimensionLevelData::getDayTime),
+                            Codec.INT.fieldOf("clear_weather_time").forGetter(DimensionLevelData::getClearWeatherTime),
+                            Codec.BOOL.fieldOf("thundering").forGetter(DimensionLevelData::isThundering),
+                            Codec.INT.fieldOf("thunder_time").forGetter(DimensionLevelData::getThunderTime),
+                            Codec.BOOL.fieldOf("raining").forGetter(DimensionLevelData::isRaining),
+                            Codec.INT.fieldOf("rain_time").forGetter(DimensionLevelData::getRainTime)
+                    ).apply(instance, (dayTime, clearWeatherTime, thundering, thunderTime, raining, rainTime) -> {
+                        DimensionLevelData data = new DimensionLevelData(worldData, wrapped);
+                        data.dayTime = dayTime;
+                        data.clearWeatherTime = clearWeatherTime;
+                        data.thundering = thundering;
+                        data.thunderTime = thunderTime;
+                        data.raining = raining;
+                        data.rainTime = rainTime;
+                        return data;
+                    })
+            ).xmap(Serialized::new, Serialized::get);
         }
     }
 }
