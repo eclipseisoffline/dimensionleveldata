@@ -47,6 +47,6 @@ Unsupported versions are still available to download, but they won't receive new
 
 ## Usage
 
-Mod builds can be found [here](https://github.com/eclipseisoffline/dimensionleveldata/packages/2397810) and on [Modrinth](https://modrinth.com/mod/dimension-level-data).
+Mod builds can be found on the releases page, as well as on [Modrinth](https://modrinth.com/mod/dimension-level-data).
 
 The Fabric API is required. This mod is not required on clients.
