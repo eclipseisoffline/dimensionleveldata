@@ -7,7 +7,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.world.RandomSequences;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.Level;
@@ -52,7 +51,7 @@ public abstract class ServerLevelMixin extends Level {
     // Injecting at tail of method, and not directly replacing the serverLevelData PUTFIELD call, because getDataStorage() is not available yet when that call is made
     @Inject(method = "<init>", at = @At("TAIL"))
     public void setDimensionLevelData(MinecraftServer server, Executor dispatcher, LevelStorageSource.LevelStorageAccess levelStorageAccess,
-                                      ServerLevelData serverLevelData, ResourceKey<Level> dimension, LevelStem levelStem, ChunkProgressListener progressListener,
+                                      ServerLevelData serverLevelData, ResourceKey<Level> dimension, LevelStem levelStem,
                                       boolean isDebug, long biomeZoomSeed, List<CustomSpawner> customSpawners, boolean tickTime, RandomSequences randomSequences, CallbackInfo ci) {
         if (serverLevelData instanceof DerivedLevelDataAccessor derived) {
             this.serverLevelData = DimensionLevelData.createForLevel(getDataStorage(), derived.getWorldData(), derived.getWrapped());
