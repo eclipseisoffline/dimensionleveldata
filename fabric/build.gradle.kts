@@ -1,5 +1,3 @@
-import net.fabricmc.loom.api.fabricapi.FabricApiExtension
-
 plugins {
     alias(libs.plugins.multimod)
 }
