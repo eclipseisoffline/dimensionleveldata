@@ -6,6 +6,8 @@
 [![Discord Badge](https://img.shields.io/badge/chat-discord-%235865f2)](https://discord.gg/CNNkyWRkqm)
 [![Github Badge](https://img.shields.io/badge/github-dimensionleveldata-white?logo=github)](https://github.com/eclipseisoffline/dimensionleveldata)
 ![GitHub License](https://img.shields.io/github/license/eclipseisoffline/dimensionleveldata)
+![Available for Fabric](https://img.shields.io/badge/available_for-fabric-_?color=%23dbd0b4)
+![Available for NeoForge](https://img.shields.io/badge/available_for-NeoForge-_?color=%23e58c53)
 
 This mod splits weather and time properties across dimensions, so that different dimensions can have a different time/weather.
 
@@ -35,12 +37,13 @@ For support and/or any questions you may have, feel free to join [my discord](ht
 
 | Minecraft Version | Status       |
 |-------------------|--------------|
-| 1.21.11           | ✅ Current    |
+| 26.1              | ✅ Current    |
+| 1.21.11           | ✔️ Available |
 | 1.21.9+10         | ✔️ Available |
 | 1.21.6+7+8        | ✔️ Available |
 | 1.21.5            | ✔️ Available |
 | 1.21.4            | ✔️ Available |
-| 1.21+1            | ✅ Current    |
+| 1.21+1            | ✔️ Available |
 | 1.20.1            | ✔️ Available |
 
 I try to keep support up for the latest major and latest minor release of Minecraft. Updates to newer Minecraft
@@ -48,8 +51,10 @@ versions may be delayed from time to time, as I do not always have the time to i
 
 Unsupported versions are still available to download, but they won't receive new features or bugfixes.
 
+NeoForge ports are available for Minecraft 26.1 onwards.
+
 ## Usage
 
 Mod builds can be found on the releases page, as well as on [Modrinth](https://modrinth.com/mod/dimension-level-data).
 
-The Fabric API is required. This mod is not required on clients.
+The Fabric API is required on Fabric. This mod is not required on clients.
