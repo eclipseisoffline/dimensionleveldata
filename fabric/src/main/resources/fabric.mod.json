@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "dimensionleveldata",
+  "id": "${mod_id}",
   "version": "${version}",
-  "name": "Dimension Level Data",
-  "description": "This mod splits weather and time properties across dimensions, so that different dimensions can have a different time/weather.",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
     {
       "name": "eclipseisoffline",
@@ -13,20 +13,20 @@
     }
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/dimension-level-data",
-    "issues": "https://github.com/eclipseisoffline/dimensionleveldata/issues",
-    "sources": "https://github.com/eclipseisoffline/dimensionleveldata"
+    "homepage": "https://modrinth.com/mod/${modrinth_id}",
+    "issues": "https://github.com/${github_repository}/issues",
+    "sources": "https://github.com/${github_repository}"
   },
   "license": "LGPL-3.0-only",
-  "icon": "assets/dimensionleveldata/icon.png",
+  "icon": "assets/${mod_id}/icon.png",
   "environment": "*",
   "mixins": [
     "dimensionleveldata.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=${fabric_loader_version}",
     "fabric-object-builder-api-v1": "*",
-    "minecraft": "${supported_versions}"
+    "minecraft": "${minecraft_version}"
   },
   "custom": {
     "modmenu": {
