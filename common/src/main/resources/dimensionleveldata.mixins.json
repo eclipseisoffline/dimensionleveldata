@@ -4,8 +4,9 @@
   "package": "xyz.eclipseisoffline.dimensionleveldata.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "DerivedLevelDataAccessor",
-    "LevelAccessor",
+    "MinecraftServerMixin",
+    "PlayerListMixin",
+    "ServerClockManagerMixin",
     "ServerLevelMixin",
     "TimeCommandMixin",
     "WeatherCommandMixin"

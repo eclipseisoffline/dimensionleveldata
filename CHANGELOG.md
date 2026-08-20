@@ -1,1 +1,6 @@
-- Update to 1.21.11.
+- Update to Minecraft 26.2.
+- Reworked the mod around the new world clock and weather systems introduced in Minecraft 26.x:
+  - Every dimension (except the primary one, usually the overworld) now stores its own weather data and world clock states in its own dimension data storage, instead of sharing the server-global ones.
+  - `/time` and `/weather` only affect the dimension they are executed in, like before.
+  - Sleeping only advances the clock and clears the weather of the dimension slept in.
+- Time and weather values of dimensions other than the overworld will reset when updating an existing world, as the storage format has completely changed.
